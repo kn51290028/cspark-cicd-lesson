@@ -21,6 +21,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest pytest-cov
           pip install poetry
+          mkdir -p my_package/dist
       - name: Run Tests
         run: |
           pytest --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
@@ -38,6 +39,11 @@ jobs:
     needs: PythonVersionSetup
     steps:
     # copy the setup steps except Run Tests from previous job
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: builds
+          path: my_package/dist/    
       - name: Publish
         working-directory: my_package
         run: |

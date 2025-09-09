@@ -1,5 +1,5 @@
-from app import app
+from appjpm import appjpm
 
 
 def test_add():
-    assert app.add(1, 1) == 2
+    assert appjpm.add(1, 1) == 2
